@@ -10,7 +10,6 @@ import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 
 const pastRenovationList = [
     {
@@ -84,10 +83,10 @@ const RenovationUnit = ({unit}) => {
                 {unit.year}
             </Typography>
             <Typography variant="body2" component="p">
-                {unit.description}
+                Details: {unit.description}
             </Typography>
             {unit.estimateCost ? <Typography variant="body2" component="p">
-                € {unit.estimateCost}
+                Estimation cost: € {unit.estimateCost}
             </Typography>
             : null}
             {unit.accuracy ? <Box component="fieldset" mb={3} borderColor="transparent">

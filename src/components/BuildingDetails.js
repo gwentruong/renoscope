@@ -14,7 +14,7 @@ const BuildingDetails = () => {
     const [heating, setHeating] = useState('Vesikeskuslämmitys')
     const [heatSource, setHeatSource] = useState('Kevyt polttoöljy')
     const [material, setMaterial] = useState('Concrete')
-    const [sauna, setSauna] = useState(1)
+    const [sauna, setSauna] = useState(true)
 
     return (
         <div>
@@ -31,7 +31,7 @@ const BuildingDetails = () => {
                     defaultValue={buildYear} />
                 <TextField
                     id="floor-area"
-                    label="Floor area"
+                    label="Floor area (m2)"
                     defaultValue={floorArea} />
             </div>
             <div>
@@ -66,7 +66,7 @@ const BuildingDetails = () => {
             </div>
             <div>
                 <FormControlLabel
-                    control={<Checkbox checked="sauna" name="sauna" />}
+                    control={<Checkbox checked={sauna} name="sauna" />}
                     label="Sauna"
                 />
             </div>
