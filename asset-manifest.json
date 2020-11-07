@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/renoscope/static/css/main.cee08eba.chunk.css",
+    "main.js": "/renoscope/static/js/main.b9467613.chunk.js",
+    "main.js.map": "/renoscope/static/js/main.b9467613.chunk.js.map",
+    "runtime-main.js": "/renoscope/static/js/runtime-main.6a160e60.js",
+    "runtime-main.js.map": "/renoscope/static/js/runtime-main.6a160e60.js.map",
+    "static/css/2.1ff209b0.chunk.css": "/renoscope/static/css/2.1ff209b0.chunk.css",
+    "static/js/2.4a048bb0.chunk.js": "/renoscope/static/js/2.4a048bb0.chunk.js",
+    "static/js/2.4a048bb0.chunk.js.map": "/renoscope/static/js/2.4a048bb0.chunk.js.map",
+    "index.html": "/renoscope/index.html",
+    "static/css/2.1ff209b0.chunk.css.map": "/renoscope/static/css/2.1ff209b0.chunk.css.map",
+    "static/css/main.cee08eba.chunk.css.map": "/renoscope/static/css/main.cee08eba.chunk.css.map",
+    "static/js/2.4a048bb0.chunk.js.LICENSE.txt": "/renoscope/static/js/2.4a048bb0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6a160e60.js",
+    "static/css/2.1ff209b0.chunk.css",
+    "static/js/2.4a048bb0.chunk.js",
+    "static/css/main.cee08eba.chunk.css",
+    "static/js/main.b9467613.chunk.js"
+  ]
+}
