@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
 
 const BuildingDetails = () => {
     const [address, setAddress] = useState("Maerinne 11 A1, 02160, Espoo")
@@ -68,6 +69,11 @@ const BuildingDetails = () => {
                     control={<Checkbox checked="sauna" name="sauna" />}
                     label="Sauna"
                 />
+            </div>
+            <div>
+                <Button variant="contained" color="primary">
+                    Verify
+                </Button>
             </div>  
         </div>
     );
