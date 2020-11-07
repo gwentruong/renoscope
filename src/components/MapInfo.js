@@ -8,7 +8,7 @@ const MapInfo = ({building}) => {
                 <tbody>
                     <tr>
                         <th>Address</th>
-                        <td>{building.street_fi} {building.building_number}, {building.postal_code}</td>
+                        <td>{building.address}</td>
                     </tr>
                     <tr>
                         <th>Build year</th>
@@ -23,12 +23,16 @@ const MapInfo = ({building}) => {
                         <td>{building.cadastral_building_id}</td>
                     </tr>
                     <tr>
-                        <th>Building total floor area</th>
-                        <td>{building.total_floor_area}</td>
+                        <th>Floor area</th>
+                        <td>{building.floorArea}</td>
                     </tr>
                     <tr>
                         <th>Floors</th>
-                        <td> {building.floors} m2</td>
+                        <td> {building.floors}</td>
+                    </tr>
+                    <tr>
+                        <th>Rooms</th>
+                        <td> {building.rooms}</td>
                     </tr>
                     <tr>
                         <th>Building material</th>
@@ -43,12 +47,16 @@ const MapInfo = ({building}) => {
                         <td> {building.heating_source} </td>
                     </tr>
                     <tr>
+                        <th>Sauna</th>
+                        <td> {building.sauna ? "Yes" : "No"}</td>
+                    </tr>
+                    <tr>
                         <th>Solar energy potential</th>
                         <td> {building.elec} kWh/year </td>
                     </tr>
                     <tr>
-                        <th>Solar panel area</th>
-                        <td> {building.co2} m2 </td>
+                        <th>CO2 emission</th>
+                        <td> {building.co2} kg/year </td>
                     </tr>
                 </tbody>
             </table>

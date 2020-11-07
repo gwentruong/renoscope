@@ -64,7 +64,7 @@ const BuildingForm = ({info}) => {
         }
 
         info = {...info, ...newInfo}
-        console.log(info)
+        console.log(JSON.stringify(info))
     }
 
     return (
