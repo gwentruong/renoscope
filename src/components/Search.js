@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
+import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -42,34 +44,81 @@ const Search = () => {
       }
     }
 
+    const titleFontTheme = createMuiTheme({
+      typography: {
+        fontFamily: [
+          'Wallpoet',
+          'cursive',
+        ].join(','),
+      },});
+
+    const buttonColorTheme = createMuiTheme({
+      palette: {
+        primary: {
+          main: '#e05297',
+        },
+        secondary: {
+          main: '#ea86b6',
+        },
+      },
+    });
+
     return (
       <React.Fragment>
-        <Container maxwidth="sm">
-          <Typography variant="h3" component="h2" gutterBottom>
-            RenoScope
-          </Typography>
-          <Typography variant="h5" gutterBottom>
-            Gaze into the crystal! Ooh, tell me the details of the next renovations at...
-          </Typography>
-          <TextField
-            id="input-with-icon-textfield"
-            type="search"
-            onChange={handleAddressChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <div>
-            <Button variant="contained" color="primary"
-                    onClick={() => {submitAddress()}}>
-              Search
-            </Button>
-          </div>
-        </Container>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <Container maxwidth="sm" className="search-container">
+            <ThemeProvider theme={titleFontTheme}>
+              <Typography variant="h3" component="h2" gutterBottom align="center" className="renoscope-title">
+                RenoScope
+              </Typography>
+            </ThemeProvider>
+
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <i>Gaze into the crystal! Ooh, tell me the details of the next renovations at...</i>
+            </Box>
+
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              minHeight="15vh"
+            >
+              <Box width={400} >
+                <TextField
+                  id="input-with-icon-textfield"
+                  type="search"
+                  variant="outlined"
+                  onChange={handleAddressChange}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  fullWidth
+                />
+              </Box>
+              <Box m={2}>
+                <ThemeProvider theme={buttonColorTheme}>
+                  <Button className="tell-me-button" variant="contained" color="primary"
+                          onClick={() => {submitAddress()}}>
+                    Tell me
+                  </Button>
+                </ThemeProvider>
+              </Box>
+            </Box>
+          </Container>
+        </Box>
       </React.Fragment>
       
     );
