@@ -1,7 +1,16 @@
 import React, {useState} from 'react'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+import Rating from '@material-ui/lab/Rating';
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 
 const pastRenovationList = [
     {
@@ -36,77 +45,97 @@ const upcomingRenovationList = [
         year: 2021,
         renovation: "Window",
         description: "Remodel all windows and insulation",
-        estimateCost: 5000
+        estimateCost: 5000,
+        accuracy: 2
     },
     {
         id: 2,
         year: 2025,
         renovation: "Facade",
         description: "Reinforce facade material",
-        estimateCost: 1500
+        estimateCost: 1500,
+        accuracy: 4
     },
     {
         id: 3,
         year: 2028,
         renovation: "Pipe",
         description: "Scheduled renovation",
-        estimateCost: 8000
+        estimateCost: 8000,
+        accuracy: 2
     },
     {
         id: 4,
         year: 2030,
         renovation: "Flooring",
         description: "Check for mold and leaking",
-        estimateCost: 2000
+        estimateCost: 2000,
+        accuracy: 1
     }
 ]
 
 const RenovationUnit = ({unit}) => {
     return (
-        <Card>
-            <CardContent>
-                <Typography variant="h6" component="h2">
-                    {unit.renovation}
-                </Typography>
-                <Typography color="textSecondary">
-                    {unit.year}
-                </Typography>
-                <Typography variant="body2" component="p">
-                    {unit.description}
-                </Typography>
-                {unit.estimateCost ? <Typography variant="body2" component="p">
-                    € {unit.estimateCost}
-                </Typography>
-                : null}
-            </CardContent>
-        </Card>
+        <Paper>
+            <Typography variant="h6" component="h2">
+                {unit.renovation}
+            </Typography>
+            <Typography color="textSecondary">
+                {unit.year}
+            </Typography>
+            <Typography variant="body2" component="p">
+                {unit.description}
+            </Typography>
+            {unit.estimateCost ? <Typography variant="body2" component="p">
+                € {unit.estimateCost}
+            </Typography>
+            : null}
+            {unit.accuracy ? <Box component="fieldset" mb={3} borderColor="transparent">
+                                <Typography component="legend">Accuracy</Typography>
+                                <Rating name="read-only" value={unit.accuracy} readOnly />
+                            </Box> : null}
+        </Paper>
     );
 }
-
+const RenovationTimeline = ({unit}) => {
+    return (
+        <div>
+            <TimelineItem>
+                <TimelineSeparator>
+                    <TimelineDot />
+                    <TimelineConnector />
+                </TimelineSeparator>
+                <TimelineContent>
+                    <RenovationUnit unit={unit} />
+                </TimelineContent>
+            </TimelineItem>
+        </div>
+    );
+}
 const Renovations = () => {
     const [pastRenovations, setPastRenovations] = useState(pastRenovationList)
     const [upcomingRenovation, setUpcomingRenovation] = useState(upcomingRenovationList)
     const [renovationUnit, setRenovationUnit] = useState({})
 
     return (
-        <div>
+        <Container>
             <Typography variant="h5" component="h2">
                 Past renovations
             </Typography>
-            <div>
-                {pastRenovations.map(renovation => <RenovationUnit
+            <Timeline>
+                {pastRenovations.map(renovation => <RenovationTimeline
                                                         key={renovation.id} 
                                                         unit={renovation} />)}
-            </div>
+            </Timeline>
             <Typography variant="h5" component="h2">
                 Upcoming renovations
             </Typography>
-            <div>
-                {upcomingRenovation.map(renovation => <RenovationUnit
+            <Timeline>
+                {upcomingRenovation.map(renovation => <RenovationTimeline
                                                         key={renovation.id} 
                                                         unit={renovation} />)}
-            </div>
-        </div>
+            </Timeline>
+        </Container>
     );
 }
 
