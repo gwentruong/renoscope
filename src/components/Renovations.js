@@ -111,7 +111,7 @@ const RenovationTimeline = ({unit}) => {
         </div>
     );
 }
-const Renovations = () => {
+const Renovations = ({pastRenovationList, upcomingRenovationList}) => {
     const [pastRenovations, setPastRenovations] = useState(pastRenovationList)
     const [upcomingRenovation, setUpcomingRenovation] = useState(upcomingRenovationList)
     const [renovationUnit, setRenovationUnit] = useState({})
