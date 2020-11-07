@@ -8,7 +8,7 @@ import './App.css'
 
 const App = () => {
   return (
-    <Map />
+    <Map addressCoords={[24.865098, 60.243748]} />
   );
 }
 
