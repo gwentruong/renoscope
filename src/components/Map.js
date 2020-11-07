@@ -1,7 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react'
 import mapboxgl from 'mapbox-gl';
 import "mapbox-gl/dist/mapbox-gl.css";
-import Container from '@material-ui/core/Container';
 
 const bounds = [
     [24.782813,60.128574],
@@ -12,6 +11,7 @@ const Map = ({addressCoords}) => {
     const [map, setMap] = useState(null);
     const mapContainer = useRef(null);
     const [buildingInfo, setBuildingInfo] = useState(null);
+    const [confirmedPos, setConfirmedPos] = useState({});
 
   const intializeMap = ({ setMap, mapContainer }) => {
     mapboxgl.accessToken = 'pk.eyJ1IjoidXllbnRydW9uZyIsImEiOiJjanVjcGN0b3IwaG5xNDNwZHJ3czRlNmJhIn0.u7o0VUuXY5f-rs4hcrwihA';
@@ -21,7 +21,7 @@ const Map = ({addressCoords}) => {
       container: mapContainer.current,
       style: "mapbox://styles/uyentruong/ckfbjtpi45eqp19myy1pon6r3",
       center: addressCoords,
-      zoom: 14,
+      zoom: 17,
       maxBounds: bounds
     });
     // Scale control
@@ -36,6 +36,16 @@ const Map = ({addressCoords}) => {
     const nav = new mapboxgl.NavigationControl();
     initMap.addControl(nav, 'bottom-right');
 
+    let marker = new mapboxgl.Marker(
+        {
+            draggable: true
+        })
+            .setLngLat(addressCoords)
+            .addTo(initMap)
+
+    marker.on('dragend', (e) => {
+        setConfirmedPos(e.target._pos)
+    })
     setMap(initMap);
   }
 
@@ -66,28 +76,35 @@ const Map = ({addressCoords}) => {
             });
 
             map.on('click', 'building-basic', (e) => {
-                console.log(e.features[0])
-                console.log(e.lngLat)
+                console.log(e.point)
             })
-
-            let feat = map.queryRenderedFeatures(
-                addressCoords,
-                { layers: ['building-basic'] }
-            );
-
-            console.log(feat);
-
-            if (feat) {
-                setBuildingInfo(feat)
-            }
         });
     }
   }
 
-  useEffect(() => {
+  const getBuildingInfo = () => {
+      if (map) {
+          let feat = map.queryRenderedFeatures(
+              confirmedPos,
+              { layers: ['building-basic']}
+          )
+
+          if (feat) {
+              setBuildingInfo(feat.properties)
+              console.log(feat.properties)
+          }
+      }
+  }
+
+    useEffect(() => {
         !map && intializeMap({setMap, mapContainer});
         addDataLayer();
-    }, [map])
+    }, [map]);
+
+    useEffect(() => {
+        console.log(confirmedPos);
+        getBuildingInfo()
+    }, [confirmedPos]);
 
   return (
     <React.Fragment>
