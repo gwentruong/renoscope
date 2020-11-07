@@ -26,7 +26,7 @@ const Search = () => {
         .then(
           response => {
             console.log(response.data)
-            let coords = response.data.center
+            let coords = response.data.features[0].center
             setCoordinates(coords)
           },
           error => {

@@ -65,10 +65,17 @@ const Map = ({addressCoords}) => {
                 }
             });
 
+            map.on('click', 'building-basic', (e) => {
+                console.log(e.features[0])
+                console.log(e.lngLat)
+            })
+
             let feat = map.queryRenderedFeatures(
                 addressCoords,
                 { layers: ['building-basic'] }
             );
+
+            console.log(feat);
 
             if (feat) {
                 setBuildingInfo(feat)
