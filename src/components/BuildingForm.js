@@ -68,7 +68,7 @@ const BuildingForm = ({info}) => {
     }
 
     return (
-        <Paper>
+        <Paper className="building-form-container">
             <form onSubmit={handleSubmit}>
                 <div>
                     <TextField 
