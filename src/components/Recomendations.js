@@ -12,12 +12,14 @@ const energyStatus = {
 }
 
 const sustainability = [
-    {
+    {   
+        id: 1,
         target: "Green roof",
         compatibility: true,
         url: "https://www.nps.gov/tps/sustainability/new-technology/green-roofs/define.htm#:~:text=A%20green%20roof%20is%20a,as%20vegetative%20or%20eco%E2%80%93roofs."
     },
     {
+        id: 2,
         target: "Solar panels",
         compatibility: false,
         url: "https://www.helen.fi/en/solar-panels/own-solar-power-plant"
@@ -60,19 +62,19 @@ const Recomendations = () => {
                         How to increase sustainable value of the building
                     </Typography>
                 </div>
-                {sustain.map(sus => <div>
+                {sustain.map(sus => <div key={sus.id}>
                         <div>
-                            <Typography variant="body2" component="h">
+                            <Typography variant="body2" component="h2">
                                 Type : {sus.target}
                             </Typography>
                         </div>
                         <div>
-                            <Typography variant="body2" component="h">
+                            <Typography variant="body2" component="h2">
                                 compatibility : <Checkbox disabled checked={sus.compatibility} />
                             </Typography>
                         </div>
                         <div>
-                            <Typography variant="body2" component="h">
+                            <Typography variant="body2" component="h2">
                                 <Link href={sus.url} onClick={preventDefault}>
                                     More information
                                 </Link>
