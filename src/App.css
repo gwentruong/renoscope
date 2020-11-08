@@ -39,8 +39,10 @@
 
 .mapContainer {
   position: absolute;
-  float: left;
-  width: 50%
+  top :0;
+  left : 0;
+  right: 0;
+  bottom: 0;
   }
 
 .renoscope-title {
