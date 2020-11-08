@@ -10,7 +10,7 @@ import References from './components/References';
 
 const App = () => {
   return (
-    <Map addressCoords={[24.865098, 60.243748]} />
+    <Search />
   )
 }
 
