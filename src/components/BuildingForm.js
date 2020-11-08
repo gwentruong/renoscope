@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
+import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 const BuildingForm = ({info}) => {
     const [address, setAddress] = useState(info.street_fi + ' ' + info.building_number + ', ' + info.postal_code)
@@ -67,76 +70,133 @@ const BuildingForm = ({info}) => {
         console.log(JSON.stringify(info))
     }
 
+    const useStyles = makeStyles((theme: Theme) =>
+        createStyles({
+            root: {
+                flexGrow: 1,
+            },
+            paper: {
+                padding: theme.spacing(2),
+                textAlign: 'center',
+                color: theme.palette.text.secondary,
+            },
+        }),
+    );
+
+    const classes = useStyles();
+
     return (
-        <Paper className="building-form-container">
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <TextField 
-                        required id="address" 
-                        label="Address"
-                        defaultValue={address} 
-                        onChange={addressChange}/>
-                </div>
-                <div>
-                    <TextField
-                        id="build-year"
-                        label="Build year"
-                        defaultValue={buildYear}
-                        onChange={buildYearChange} />
-                    <TextField
-                        id="floor-area"
-                        label="Floor area (m2)"
-                        defaultValue={floorArea} 
-                        onChange={floorAreaChange} />
-                </div>
-                <div>
-                    <TextField
-                        id="number-of-rooms"
-                        label="Number of rooms"
-                        defaultValue={rooms}
-                        onChange={roomsChange} />
-                    <TextField
-                        id="floors-number"
-                        label="Number of floors"
-                        defaultValue={floors}
-                        onChange={floorsChange} /> 
-                </div>
-                <div>
-                    <TextField
-                        id="property-type"
-                        label="Property Type"
-                        defaultValue={propertyType} 
-                        onChange={propertyTypeChange} />
-                    <TextField
-                        id="building-material"
-                        label="Building material"
-                        defaultValue={material} 
-                        onChange={materialChange} />
-                </div>
-                <div>
-                    <TextField
-                        id="heating"
-                        label="Heating system"
-                        defaultValue={heating} 
-                        onChange={heatingChange}/> 
-                    <TextField
-                        id="heat-source"
-                        label="Heat source"
-                        defaultValue={heatSource} 
-                        onChange={heatSourceChange}/>
-                </div>
-                <div>
-                    <FormControlLabel
-                        control={<Checkbox checked={sauna} name="sauna" onChange={saunaChange} />}
-                        label="Sauna"
-                    />
-                </div>
-                <div>
-                    <Button variant="contained" color="primary" type="submit">
-                        Verify
-                    </Button>
-                </div>  
-            </form>
+        <Paper>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              minHeight="100vh"
+            >
+                <form onSubmit={handleSubmit}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={2}>
+                            <TextField
+                                required id="address"
+                                label="Address"
+                                defaultValue={address}
+                                onChange={addressChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={7}></Grid>
+
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={2}>
+                            <TextField
+                                id="build-year"
+                                label="Build year"
+                                defaultValue={buildYear}
+                                onChange={buildYearChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                id="floor-area"
+                                label="Floor area (m2)"
+                                defaultValue={floorArea}
+                                onChange={floorAreaChange} />
+                        </Grid>
+                        <Grid item xs={4}></Grid>
+
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={2}>
+                            <TextField
+                                id="number-of-rooms"
+                                label="Number of rooms"
+                                defaultValue={rooms}
+                                onChange={roomsChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                id="floors-number"
+                                label="Number of floors"
+                                defaultValue={floors}
+                                onChange={floorsChange} />
+                        </Grid>
+                        <Grid item xs={4}></Grid>
+
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={2}>
+                            <TextField
+                                id="property-type"
+                                label="Property Type"
+                                defaultValue={propertyType}
+                                onChange={propertyTypeChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                id="building-material"
+                                label="Building material"
+                                defaultValue={material}
+                                onChange={materialChange} />
+                        </Grid>
+                        <Grid item xs={4}></Grid>
+
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={2}>
+                            <TextField
+                                id="heating"
+                                label="Heating system"
+                                defaultValue={heating}
+                                onChange={heatingChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                id="heat-source"
+                                label="Heat source"
+                                defaultValue={heatSource}
+                                onChange={heatSourceChange}/>
+                        </Grid>
+                        <Grid item xs={4}></Grid>
+
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={2}>
+                            <FormControlLabel
+                                control={<Checkbox checked={sauna} name="sauna" onChange={saunaChange} />}
+                                label="Sauna"
+                            />
+                        </Grid>
+                        <Grid item xs={7}></Grid>
+
+                        <Grid item xs={3}></Grid>
+                        <Grid item xs={2}>
+                            <Button variant="contained" color="primary" type="submit">
+                                Verify
+                            </Button>
+                        </Grid>
+                        <Grid item xs={7}></Grid>
+                    </Grid>
+                </form>
+            </Box>
         </Paper>
     );
 }
