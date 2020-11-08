@@ -66,7 +66,7 @@ const Map = ({addressCoords}) => {
                     visibility: 'visible'
                 },
                 paint: {
-                    'fill-color': '#e05297',
+                    'fill-color': '#e5abc7',
                     'fill-opacity': 0.4
                 }
             });
