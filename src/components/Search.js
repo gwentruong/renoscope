@@ -12,7 +12,7 @@ import axios from 'axios';
 const accessToken = 'pk.eyJ1IjoidXllbnRydW9uZyIsImEiOiJjanVjcGN0b3IwaG5xNDNwZHJ3czRlNmJhIn0.u7o0VUuXY5f-rs4hcrwihA';
 const bbox = '24.782813,60.128574, 25.254512,60.29785'
 
-const Search = () => {
+const Search = (props) => {
     const [address, setAddress] = useState('')
     const [coordinates, setCoordinates] = useState([])
 
@@ -41,6 +41,7 @@ const Search = () => {
       if (address) {
         console.log(address)
         geocode()
+        props.action()
       }
     }
 
