@@ -11,7 +11,6 @@ const Map = ({addressCoords}) => {
     const [map, setMap] = useState(null);
     const mapContainer = useRef(null);
     const [buildingInfo, setBuildingInfo] = useState(null);
-    const [confirmedPos, setConfirmedPos] = useState({});
 
   const intializeMap = ({ setMap, mapContainer }) => {
     mapboxgl.accessToken = 'pk.eyJ1IjoidXllbnRydW9uZyIsImEiOiJjanVjcGN0b3IwaG5xNDNwZHJ3czRlNmJhIn0.u7o0VUuXY5f-rs4hcrwihA';
@@ -43,9 +42,6 @@ const Map = ({addressCoords}) => {
             .setLngLat(addressCoords)
             .addTo(initMap)
 
-    marker.on('dragend', (e) => {
-        setConfirmedPos(e.target._pos)
-    })
     setMap(initMap);
   }
 
@@ -70,41 +66,52 @@ const Map = ({addressCoords}) => {
                     visibility: 'visible'
                 },
                 paint: {
-                    'fill-color': '#ff69b4',
-                    'fill-opacity': 0.7,
+                    'fill-color': '#e05297',
+                    'fill-opacity': 0.4
                 }
             });
 
+            map.addLayer({
+                id: 'building-highlight',
+                type: 'fill',
+                source: 'building',
+                'source-layer': buildingLayer,
+                layout: {
+                    visibility: 'visible'
+                },
+                paint: {
+                    'fill-color': '#e05297',
+                    'fill-opacity': 0.8
+                },
+                filter: ['in', 'ogc_fid', '']
+            });
+       
+            let clickedLayerId = null;
+
             map.on('click', 'building-basic', (e) => {
                 console.log(e.point)
+                let f = map.queryRenderedFeatures(
+                    [[e.point.x - 1, e.point.y - 1], [e.point.x + 1, e.point.y + 1]],
+                    { layers: ['building-basic'] }
+                )
+                if (f.length > 0) {
+                    if (clickedLayerId) {
+                        map.setFilter('building-highlight', ['in', 'ogc_fid', ''])
+                    }
+                    clickedLayerId = f[0].properties.ogc_fid;
+                    map.setFilter('building-highlight', ['in', 'ogc_fid', clickedLayerId])
+                    setBuildingInfo(f[0].properties)
+                }
+                
             })
         });
     }
-  }
-
-  const getBuildingInfo = () => {
-      if (map) {
-          let feat = map.queryRenderedFeatures(
-              confirmedPos,
-              { layers: ['building-basic']}
-          )
-
-          if (feat) {
-              setBuildingInfo(feat.properties)
-              console.log(feat.properties)
-          }
-      }
   }
 
     useEffect(() => {
         !map && intializeMap({setMap, mapContainer});
         addDataLayer();
     }, [map]);
-
-    useEffect(() => {
-        console.log(confirmedPos);
-        getBuildingInfo()
-    }, [confirmedPos]);
 
   return (
     <React.Fragment>
